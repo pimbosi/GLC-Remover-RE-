@@ -1,7 +1,11 @@
 #ifndef GRAMATICA_H
 #define GRAMATICA_H
 
+#include <iostream>
+#include <string>
+#include <cstddef>
 #include "NaoTerminal.h"
+#include "DerivacaoEsquerda.h"
 
 class Gramatica {
 private:
@@ -13,11 +17,12 @@ public:
     // Aplica o algoritmo para eliminar recursão à esquerda
     void aplicarAlgoritmo();
     // Resolve a recursão à esquerda não imediata entre A e B
-    void resolverNaoImediataLR(NaoTerminal& A, NaoTerminal& B);
+    void resolverNaoImediataRE(NaoTerminal& A, NaoTerminal& B);
     // Resolve a recursão à esquerda imediata para A
-    void resolverImediataLR(NaoTerminal& A);
+    void resolverImediataRE(NaoTerminal& A);
     // Imprime todas as regras da gramática
-    void imprimirRegras();
+    pair<string, string> novasRegras();
+
 };
 
 #endif

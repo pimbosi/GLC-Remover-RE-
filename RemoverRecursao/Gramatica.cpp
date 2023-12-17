@@ -1,5 +1,4 @@
 #include "Gramatica.h"
-#include <cstddef>
 
 // Implementação dos métodos da classe Gramatica
 
@@ -30,7 +29,7 @@ void Gramatica::adicionarRegra(string regra) {
     }
 }
 
-void Gramatica::resolverNaoImediataLR(NaoTerminal& A, NaoTerminal& B) {
+void Gramatica::resolverNaoImediataRE(NaoTerminal& A, NaoTerminal& B) {
     string nomeA = A.getNome();
     string nomeB = B.getNome();
 
@@ -51,7 +50,7 @@ void Gramatica::resolverNaoImediataLR(NaoTerminal& A, NaoTerminal& B) {
     A.setRegras(novasRegrasA);
 }
 
-void Gramatica::resolverImediataLR(NaoTerminal& A) {
+void Gramatica::resolverImediataRE(NaoTerminal& A) {
     string nome = A.getNome();
     string novoNome = nome + "'";
 
@@ -102,16 +101,23 @@ void Gramatica::aplicarAlgoritmo() {
     for (size_t i = 0; i < size; i++) {
         for (size_t j = 0; j < i; j++) {
             // Para cada par (A, B) onde i > j, resolve recursão à esquerda não imediata
-            resolverNaoImediataLR(naoTerminais[i], naoTerminais[j]);
+            resolverNaoImediataRE(naoTerminais[i], naoTerminais[j]);
         }
         // Para cada não terminal, resolve recursão à esquerda imediata
-        resolverImediataLR(naoTerminais[i]);
+        resolverImediataRE(naoTerminais[i]);
     }
 }
 
-void Gramatica::imprimirRegras() {
+pair<string, string> Gramatica::novasRegras() {
+    string gramatica = "";
+    string derivada = "";
+    DerivacaoEsquerda derivacao;
     for (const auto& naoTerminal : naoTerminais) {
-        // Imprime as regras de cada não terminal
-        naoTerminal.imprimirRegra();
+        // Adicione as novas regras
+        gramatica += naoTerminal.novasRegras();
+        derivacao.adicionarRegra(naoTerminal.novasRegras());
+        gramatica += "\n";
     }
+    derivada = derivacao.derivaraEsquerda();
+    return make_pair(gramatica, derivada);
 }

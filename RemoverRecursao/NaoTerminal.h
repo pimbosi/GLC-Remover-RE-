@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -21,7 +22,7 @@ public:
     // Adiciona uma regra à produção
     void adicionarRegra(string regra);
     // Imprime a regra no formato "Nome -> regra1 | regra2 | ..."
-    void imprimirRegra() const;
+    string novasRegras() const;
 };
 
 #endif

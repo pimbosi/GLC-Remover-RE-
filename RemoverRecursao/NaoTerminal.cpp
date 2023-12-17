@@ -1,5 +1,4 @@
 #include "NaoTerminal.h"
-#include <iostream>
 
 // Implementação dos métodos da classe NaoTerminal
 
@@ -26,14 +25,14 @@ void NaoTerminal::adicionarRegra(string regra) {
     regrasProducao.push_back(regra);
 }
 
-void NaoTerminal::imprimirRegra() const {
-    string imprimir = "";
-    imprimir += nome + " ->";
+string NaoTerminal::novasRegras() const {
+    string novaRegra = "";
+    novaRegra += nome + " ->";
 
     for (const auto& s : regrasProducao) {
-        imprimir += " " + s + " |";
+        novaRegra += " " + s + " |";
     }
 
-    imprimir.pop_back();
-    cout << imprimir << endl;
+    novaRegra.pop_back();
+    return novaRegra;
 }

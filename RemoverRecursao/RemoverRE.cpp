@@ -5,6 +5,7 @@
 using namespace std;
 
 #include "Gramatica.h"
+#include "DerivacaoEsquerda.h"
 
 using namespace std;
 
@@ -15,8 +16,10 @@ void limparTerminal() {
 void menu() {
     int input = 0;
     string producoes;
-    string producoesSemRE;
+    string producoesInseridas;
+    pair<string, string> producoesSemREStrDerivada;
     Gramatica gramatica;
+    DerivacaoEsquerda derivacao;
 
     while (input != 2) {
         limparTerminal();
@@ -39,9 +42,11 @@ void menu() {
 
             getline(cin, producoes);
 
-            producoesSemRE = producoes;
+            producoesInseridas += producoes+"\n";
 
-            gramatica.adicionarRegra(producoesSemRE);
+            derivacao.adicionarRegra(producoes);
+
+            gramatica.adicionarRegra(producoes);
 
             limparTerminal();
 
@@ -59,12 +64,18 @@ void menu() {
             if(input==0){
                 limparTerminal();
                 cout<<"Gramatica Inserida"<<endl;
-                cout<<producoes<<endl;
+                cout<<producoesInseridas;
+
+                cout<<"String derivada mais a esquerda da gramática inserida"<<endl;
+                cout << derivacao.derivaraEsquerda() << endl;
 
                 cout<<"\nGramatica sem Recursao a Esquerda"<<endl;
                 gramatica.aplicarAlgoritmo();
-                gramatica.imprimirRegras();
-
+                producoesSemREStrDerivada = gramatica.novasRegras();
+                cout << producoesSemREStrDerivada.first;
+                cout<<"String derivada mais a esquerda da gramática inserida (desconsidere o ε)"<<endl;
+                cout << producoesSemREStrDerivada.second << endl;
+    
                 cout<<"\n3)Voltar ao menu"<<endl;
                  // Verificar se a entrada é válida
                 while (!(cin >> input) || (input != 3)) {
@@ -75,7 +86,6 @@ void menu() {
             }
 
         }
-
         if (input == 2){
             limparTerminal();
             cout<<"Encerrando..."<<endl;
