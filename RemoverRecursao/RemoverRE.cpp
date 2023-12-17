@@ -23,7 +23,8 @@ void menu() {
 
     while (input != 2) {
         limparTerminal();
-        cout << "1) Digitar producoes" << endl;
+        cout << "\tELIMINACAO DE RECURSOES A ESQUERDA\n" << endl;
+        cout << "1) Digitar regras" << endl;
         cout << "2) Encerrar programa" << endl;
 
         // Verificar se a entrada é válida
@@ -50,7 +51,7 @@ void menu() {
 
             limparTerminal();
 
-            cout << "Deseja adicionar outra producao? (1, 0): ";
+            cout << "Deseja adicionar outra regra? (1, 0): ";
 
             // Verificar se a entrada é válida
             while (!(cin >> input) || (input < 0 || input > 1)) {
@@ -73,7 +74,7 @@ void menu() {
                 gramatica.aplicarAlgoritmo();
                 producoesSemREStrDerivada = gramatica.novasRegras();
                 cout << producoesSemREStrDerivada.first;
-                cout<<"String derivada mais a esquerda da gramática inserida (desconsidere o ε)"<<endl;
+                cout<<"String derivada mais a esquerda da gramática inserida"<<endl;
                 cout << producoesSemREStrDerivada.second << endl;
     
                 cout<<"\n3)Voltar ao menu"<<endl;

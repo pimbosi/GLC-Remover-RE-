@@ -9,12 +9,16 @@ using namespace std;
 
 class DerivacaoEsquerda {
 private:
-    vector<string> terminal;
+    // Vetor de terminais
+    vector<string> terminal; 
+     // Vetor de producoes
     vector<string> producoes;
 
 public:
-    void adicionarRegra(string regra);
-    string derivaraEsquerda();
+    // Separa os terminais e as producoes
+    void adicionarRegra(string regra); 
+    // Aplica o algoritmo de derivacao mais a esquerda
+    string derivaraEsquerda();  
 };
 
 
