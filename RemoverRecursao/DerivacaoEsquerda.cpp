@@ -127,5 +127,8 @@ string DerivacaoEsquerda::derivaraEsquerda() {
         }
     }
 
+    terminal.clear();
+    producoes.clear();
+
     return derivada;
 }

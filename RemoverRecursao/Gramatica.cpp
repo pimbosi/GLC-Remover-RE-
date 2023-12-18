@@ -118,6 +118,7 @@ pair<string, string> Gramatica::novasRegras() {
         derivacao.adicionarRegra(naoTerminal.novasRegras());
         gramatica += "\n";
     }
+    naoTerminais.clear();
     derivada = derivacao.derivaraEsquerda();
     return make_pair(gramatica, derivada);
 }

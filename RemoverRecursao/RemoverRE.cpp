@@ -66,6 +66,7 @@ void menu() {
                 limparTerminal();
                 cout<<"Gramatica Inserida"<<endl;
                 cout<<producoesInseridas;
+                producoesInseridas.clear();
 
                 cout<<"String derivada mais a esquerda da gramática inserida"<<endl;
                 cout << derivacao.derivaraEsquerda() << endl;
