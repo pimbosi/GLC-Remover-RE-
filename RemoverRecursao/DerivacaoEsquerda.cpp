@@ -47,6 +47,8 @@ string DerivacaoEsquerda::derivaraEsquerda() {
                         if (posicao != string::npos) {
                             if (derivada.find(terminal[j]) != string::npos) {
                                 posicao = derivada.find(terminal[j]);
+                            }else{
+                                posicao = string::npos;
                             }
                         }
                     } else {
@@ -68,7 +70,6 @@ string DerivacaoEsquerda::derivaraEsquerda() {
                                 if (derivada.find(temporario) == string::npos) {
                                     derivada.replace(posicao, str.size(), temporario);
                                     temporario.clear();
-                                    j = 0;  // Reiniciar o loop externo
                                 }
 
                                 temporario.clear();
@@ -76,7 +77,8 @@ string DerivacaoEsquerda::derivaraEsquerda() {
                         }
                     }
                     // Break após derivar completamente a string
-                    break;
+                    if(!any_of(derivada.begin(), derivada.end(), ::isupper))
+                        break;
                 }
             }
 
@@ -94,6 +96,8 @@ string DerivacaoEsquerda::derivaraEsquerda() {
                         if (posicao != string::npos) {
                             if (derivada.find(terminal[j]) != string::npos) {
                                 posicao = derivada.find(terminal[j]);
+                            }else{
+                                posicao = string::npos;
                             }
                         }
                     } else {
@@ -112,16 +116,17 @@ string DerivacaoEsquerda::derivaraEsquerda() {
 
                             if (p == ' ' || k == producoes[j].size() - 1) {
                                 // Se a produção não estiver na derivada, substituir
-                                if (derivada.find(temporario) == string::npos) {
+                                if (derivada.find(temporario) == string::npos){
                                     derivada.replace(posicao, str.size(), temporario);
                                     temporario.clear();
-                                    j = 0;  // Reiniciar o loop externo
                                 }
 
                                 temporario.clear();
                             }
                         }
                     }
+                    if(!any_of(derivada.begin(), derivada.end(), ::isupper))
+                        break;
                 }
             }
         }
